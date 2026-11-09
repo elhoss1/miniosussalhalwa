@@ -1,0 +1,36 @@
+<div class="products-page">
+  <div class="page-header">
+    <div class="container">
+      <h1>{{ pageTitle }}</h1>
+      <p>تصفح مجموعتنا المميزة من المنتجات</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <nav class="category-tabs" aria-label="تصنيفات الكيك">
+      <button type="button" class="category-tab" [class.active]="selectedCategory === 'mini'"
+        [attr.aria-pressed]="selectedCategory === 'mini'" (click)="selectCategory('mini')">
+        ميني كيك
+      </button>
+      <button type="button" class="category-tab" [class.active]="selectedCategory === 'cake'"
+        [attr.aria-pressed]="selectedCategory === 'cake'" (click)="selectCategory('cake')">
+        الكيك
+      </button>
+    </nav>
+
+    <div class="products-container">
+      <div class="products-grid" *ngIf="!loading && products.length > 0">
+        <app-product-mini *ngFor="let product of products" [product]="product"></app-product-mini>
+      </div>
+
+      <div class="loading" *ngIf="loading">
+        <p>جاري تحميل المنتجات...</p>
+      </div>
+
+      <div class="no-products" *ngIf="!loading && products.length === 0">
+        <p>لا توجد منتجات متاحة حالياً في هذه الفئة</p>
+        <p>يرجى المحاولة لاحقاً أو تصفح فئات أخرى</p>
+      </div>
+    </div>
+  </div>
+</div>
